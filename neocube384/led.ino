@@ -5,7 +5,7 @@ void dispChar(int code, int color, int side)
     if(pixel_pos[i].side==side) {
       if((font8x8[code][i/8]>>(i%8))&1) {leds.setPixel(i, colorc[color].r, colorc[color].g, colorc[color].b);}
       else leds.setPixel(i, 0, 0, 0);
-      Serial.println(i);
+      //Serial.println(i);
     }
   }
   leds.show();  

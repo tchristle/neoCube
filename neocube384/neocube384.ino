@@ -92,6 +92,7 @@ long axi, ayi, azi;
 float Ax, Ay, Az;
 float Gx, Gy, Gz;
 float outRoll, outPitch, outYaw;
+float Ux, Uy, Uz;    //Unit Vector
 
 //Timers
 elapsedMillis charTime;
@@ -133,7 +134,8 @@ void loop() {
     
   //AHRS filter
   AHRS_update();
-  Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); Serial.print(outYaw); Serial.println(" "); 
+  //Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); Serial.print(outYaw); Serial.println(" "); 
+  Serial.print(Ux); Serial.print(", "); Serial.print(Uy); Serial.print(", "); Serial.print(Uz); Serial.println(" "); 
 
   //full_side(clr);
   //if(charTime>250) {dispChar(cntr, clr, 1); charTime=0;}
@@ -141,14 +143,14 @@ void loop() {
   //dispChar(0x31, blue, 2);
   //dispChar(0x31, green, 3);
   //dispChar(0x31, yellow, 4);
-  dispChar(0x31, green, 5);
+  //dispChar(0x31, green, 5);
   //dispChar(0x31, orange, 6);
 
   //full_side(red, 1);
   //full_side(blue, 2);
   //full_side(green, 3);
   //full_side(yellow, 4);
-  //full_side(pink, 5);
+  full_side(outYaw/2, 5);
   //full_side(orange, 6);
     
   //dispSprite(2, blue, 1);
@@ -162,5 +164,5 @@ void loop() {
   delay(39);
 
   //stop loop
-  while(1);
+  //while(1);
 }
