@@ -96,6 +96,8 @@ float Ux, Uy, Uz;    //Unit Vector
 
 //Timers
 elapsedMillis charTime;
+elapsedMillis imuTime;
+elapsedMillis ledTime;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -124,44 +126,55 @@ void setup() {
 }
 /////////////////////////////////////////////////////////////////////////////
 
+int clr=0;
+
 void loop() {
 
   //int cntr=0x21;
-  //int clr = 0;
-
-  //IMU update
-  IMU_update();
     
-  //AHRS filter
-  AHRS_update();
-  //Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); Serial.print(outYaw); Serial.println(" "); 
-  Serial.print(Ux); Serial.print(", "); Serial.print(Uy); Serial.print(", "); Serial.print(Uz); Serial.println(" "); 
+  //IMU and AHRS filter
+  if(imuTime>43){
+    //digitalWrite(ledPin, HIGH);
+    imuTime=0;
+    IMU_update();
+    AHRS_update(); 
+    //digitalWrite(ledPin, LOW);
+    Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); 
+      Serial.print(outYaw); Serial.println(" "); 
+    //Serial.print(Ux); Serial.print(", "); Serial.print(Uy); Serial.print(", "); 
+    //  Serial.print(Uz); Serial.println(" "); 
+  }
 
-  //full_side(clr);
-  //if(charTime>250) {dispChar(cntr, clr, 1); charTime=0;}
-  //dispChar(0x31, red, 1);
-  //dispChar(0x31, blue, 2);
-  //dispChar(0x31, green, 3);
-  //dispChar(0x31, yellow, 4);
-  //dispChar(0x31, green, 5);
-  //dispChar(0x31, orange, 6);
-
-  //full_side(red, 1);
-  //full_side(blue, 2);
-  //full_side(green, 3);
-  //full_side(yellow, 4);
-  full_side(outYaw/2, 5);
-  //full_side(orange, 6);
+  if(ledTime >20){
     
-  //dispSprite(2, blue, 1);
-  //colorWipe(RED, microsec);
-  //colorRotate(clr, microsec);
+    ledTime=0;
+    //color_by_pos();
+    //if(charTime>250) {dispChar(cntr, clr, 1); charTime=0;}
+    //dispChar(0x31, red, 1);
+    //dispChar(0x31, blue, 2);
+    //dispChar(0x31, green, 3);
+    //dispChar(0x31, yellow, 4);
+    //dispChar(0x31, green, 5);
+    //dispChar(0x31, orange, 6);
 
+    clr = outYaw/2*(192.0f/180.0f);
+    digitalWrite(ledPin, HIGH);
+    full_side(clr, 1);
+    full_side(clr, 2);
+    full_side(clr, 3);
+    full_side(clr, 4);
+    full_side(clr, 5);
+    full_side(clr, 6);
+    leds.show();
+    digitalWrite(ledPin, LOW);
+    //digitalWrite(ledPin, LOW);  
+    //dispSprite(2, blue, 1);
+    //colorWipe(RED, microsec);
+    //colorRotate(clr, microsec);
+  }
+  
   //heartbeat and loop time control
-  digitalWrite(ledPin, HIGH);
-  delay(1);
-  digitalWrite(ledPin, LOW);
-  delay(39);
+  //digitalWrite(ledPin, HIGH); delay(1); digitalWrite(ledPin, LOW); delay(1);
 
   //stop loop
   //while(1);
