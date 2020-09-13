@@ -54,6 +54,7 @@ struct pixel_postions{
   int side;
 };
 static struct pixel_postions pixel_pos[512];
+int side_order[6] = {1, 2, 6, 5, 3, 4};
 
 //led color rainbow structure
 struct rainbow{
@@ -127,11 +128,10 @@ void setup() {
 /////////////////////////////////////////////////////////////////////////////
 
 int clr=0;
+int cntr=0x21;
 
 void loop() {
 
-  //int cntr=0x21;
-    
   //IMU and AHRS filter
   if(imuTime>43){
     //digitalWrite(ledPin, HIGH);
@@ -149,22 +149,22 @@ void loop() {
     
     ledTime=0;
     //color_by_pos();
-    //if(charTime>250) {dispChar(cntr, clr, 1); charTime=0;}
-    //dispChar(0x31, red, 1);
-    //dispChar(0x31, blue, 2);
-    //dispChar(0x31, green, 3);
-    //dispChar(0x31, yellow, 4);
-    //dispChar(0x31, green, 5);
-    //dispChar(0x31, orange, 6);
+    //if(charTime>250) {dispChar(cntr, clr, 4); charTime=0; cntr++; if(cntr==0x52) cntr=0x21;}
+    dispChar(0x31, red, 1);
+    dispChar(0x31, blue, 2);
+    dispChar(0x31, green, 3);
+    dispChar(0x31, yellow, 4);
+    dispChar(0x31, green, 5);
+    dispChar(0x31, orange, 6);
 
     clr = outYaw/2*(192.0f/180.0f);
     digitalWrite(ledPin, HIGH);
-    full_side(clr, 1);
-    full_side(clr, 2);
-    full_side(clr, 3);
-    full_side(clr, 4);
-    full_side(clr, 5);
-    full_side(clr, 6);
+    //full_side(clr, 0.5f, 1);
+    //full_side(clr, 0.5f, 2);
+    //full_side(clr, 0.5f, 3);
+    //full_side(clr, 0.5f, 4);
+    //full_side(clr, 0.5f, 5);
+    //full_side(clr, 0.5f, 6);
     leds.show();
     digitalWrite(ledPin, LOW);
     //digitalWrite(ledPin, LOW);  

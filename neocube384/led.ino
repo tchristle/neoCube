@@ -1,14 +1,12 @@
 
 void dispChar(int code, int color, int side)
 {
-  for (int i=0; i < leds.numPixels(); i++) {
-    if(pixel_pos[i].side==side) {
-      if((font8x8[code][i/8]>>(i%8))&1) {leds.setPixel(i, colorc[color].r, colorc[color].g, colorc[color].b);}
-      else leds.setPixel(i, 0, 0, 0);
-      //Serial.println(i);
-    }
+  int n = side_order[side-1]-1;
+  int nmax = (n+1)*64;
+  for (int i=n*64; i < nmax; i++) {
+    if((font8x8[code][(i-n*64)/8]>>(i%8))&1) {leds.setPixel(i, colorc[color].r, colorc[color].g, colorc[color].b);}
+    else leds.setPixel(i, 0, 0, 0);
   }
-  leds.show();  
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,27 +22,13 @@ void dispSprite(int num, int color, int side)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void colorRotate(int color, int wait){
-  for (int i=0; i < leds.numPixels(); i++) {
-    //leds.setPixel(i, color);
-    if(pixel_pos[i].side==1) {
-      if((font8x8[51][i/8]>>(i%8))&1) leds.setPixel(i, colorc[color].r, colorc[color].g, colorc[color].b);
-      else leds.setPixel(i, 0, 0, 0);  
-    }
-    if(pixel_pos[i].side==2) leds.setPixel(i, 0, 64, 0);
-    if(pixel_pos[i].side==3) leds.setPixel(i, 0, 0, 64);
-    if(pixel_pos[i].side==4) leds.setPixel(i, 64, 64, 0);
-    if(pixel_pos[i].side==5) leds.setPixel(i, 64, 0, 64);
-    if(pixel_pos[i].side==6) leds.setPixel(i, 0, 64, 64);
-    //delayMicroseconds(wait);
-  }
-}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void full_side(int color, int side){
+void full_side(int color, float brt, int side){
   for (int i=(side-1)*64; i < (side-1)*64+64; i++){
-    leds.setPixel(i, colorc[color].r, colorc[color].g, colorc[color].b);
+    leds.setPixel(i, colorc[color].r*brt, colorc[color].g*brt, colorc[color].b*brt);
   }
 }
 

@@ -1,7 +1,8 @@
 
 void cube_array(void){
-  
+
   int i=0;
+  
   //Serial.println(" = {");
   //top
   for(float j=-0.777; j<=0.777; j+=0.222){
