@@ -35,15 +35,19 @@ void full_side(int color, float brt, int side){
 ///////////////////////////////////////////////////////////////////////////////////////
 
 void color_by_pos(){
-  int r, b, g;
+  int r, b, g, color;
+  float brt = 0.25f;
   for (int i=0; i < leds.numPixels(); i++) {
-    r=(pixel_pos[i].x*Ax+1.0f)*32.0f;
-    g=(pixel_pos[i].y*Ay+1.0f)*32.0f;
+    r=(pixel_pos[i].z*Ax+1.0f)*32.0f;
+    g=(pixel_pos[i].z*Ay+1.0f)*32.0f;
     b=(pixel_pos[i].z*Az+1.0f)*32.0f;
-    if(r<g && r<b) r=0;
-    else if(g<r && g<b) g=0;
-    else b=0;
-    leds.setPixel(i, r, g, b);
+    color=(pixel_pos[i].z*Az+1.0f)*190;
+    //if(r<g && r<b) r=0;
+    //else if(g<r && g<b) g=0;
+    //else b=0;
+    leds.setPixel(i, r*brt, g*brt, b*brt);
+    //Serial.println(color);
+    //leds.setPixel(i, colorc[color].r*brt, colorc[color].g*brt, colorc[color].b*brt);
     //if(pixel_pos[i].side==5) Serial.println(pixel_pos[i].y);
   }
   //Serial.print(Ax+1.0f); Serial.print(", "); Serial.print(Ay+1.0f); Serial.print(", "); Serial.print(Az+1.0f); Serial.println(" "); 

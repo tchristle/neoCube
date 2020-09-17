@@ -45,7 +45,7 @@ OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 #define blue   128
 #define yellow 32
 #define pink   160
-#define orange 96
+#define orange 16
 #define ledPin 13
 
 //led postion structure
@@ -139,8 +139,8 @@ void loop() {
     IMU_update();
     AHRS_update(); 
     //digitalWrite(ledPin, LOW);
-    Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); 
-      Serial.print(outYaw); Serial.println(" "); 
+    //Serial.print(outPitch); Serial.print(", "); Serial.print(outRoll); Serial.print(", "); 
+    //  Serial.print(outYaw); Serial.println(" "); 
     //Serial.print(Ux); Serial.print(", "); Serial.print(Uy); Serial.print(", "); 
     //  Serial.print(Uz); Serial.println(" "); 
   }
@@ -148,29 +148,40 @@ void loop() {
   if(ledTime >20){
     
     ledTime=0;
-    //color_by_pos();
-    //if(charTime>250) {dispChar(cntr, clr, 4); charTime=0; cntr++; if(cntr==0x52) cntr=0x21;}
-    dispChar(0x31, red, 1);
-    dispChar(0x31, blue, 2);
-    dispChar(0x31, green, 3);
-    dispChar(0x31, yellow, 4);
-    dispChar(0x31, green, 5);
-    dispChar(0x31, orange, 6);
-
-    clr = outYaw/2*(192.0f/180.0f);
     digitalWrite(ledPin, HIGH);
-    //full_side(clr, 0.5f, 1);
-    //full_side(clr, 0.5f, 2);
-    //full_side(clr, 0.5f, 3);
-    //full_side(clr, 0.5f, 4);
-    //full_side(clr, 0.5f, 5);
-    //full_side(clr, 0.5f, 6);
-    leds.show();
-    digitalWrite(ledPin, LOW);
-    //digitalWrite(ledPin, LOW);  
+    
+//    color_by_pos();
+    //if(charTime>250) {dispChar(cntr, clr, 4); charTime=0; cntr++; if(cntr==0x52) cntr=0x21;}
+
+      //side_by_num();
+//    dispChar('1', red, 1);
+//    dispChar('2', blue, 2);
+//    dispChar('3', green, 3);
+//    dispChar('4', yellow, 4);
+//    dispChar('5', pink, 5);
+//    dispChar('6', orange, 6);
+
+//    clr = outYaw/2*(192.0f/180.0f);
+//    //full_solid();
+//    full_side(clr, 0.5f, 1);
+//    full_side(clr, 0.5f, 2);
+//    full_side(clr, 0.5f, 3);
+//    full_side(clr, 0.5f, 4);
+//    full_side(clr, 0.5f, 5);
+//    full_side(clr, 0.5f, 6);
+
     //dispSprite(2, blue, 1);
-    //colorWipe(RED, microsec);
-    //colorRotate(clr, microsec);
+
+    cntr++;
+    for(int i=0; i<385; i++){
+      //leds.setPixel(i, colorc[i%192].r*0.5f, colorc[i%192].g*0.5f, colorc[i%192].b*0.5f);
+      clr = (int(pixel_pos[i].x*86+86)+cntr)%192;
+      leds.setPixel(i, colorc[clr].r*0.5f, colorc[clr].g*0.5f, colorc[clr].b*0.5f);
+      Serial.println(int(pixel_pos[i].x*86+86));
+    }
+      
+    leds.show();
+    digitalWrite(ledPin, LOW); 
   }
   
   //heartbeat and loop time control
@@ -178,4 +189,5 @@ void loop() {
 
   //stop loop
   //while(1);
+  
 }

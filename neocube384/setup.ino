@@ -7,8 +7,8 @@ void cube_array(void){
   //top
   for(float j=-0.777; j<=0.777; j+=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
-        pixel_pos[i].x=j;
-        pixel_pos[i].y=k;
+        pixel_pos[i].x=k;
+        pixel_pos[i].y=j;
         pixel_pos[i].z=1;
         pixel_pos[i].side=1;
         //Serial.print("{"); Serial.print(j); Serial.print(", "); Serial.print(k); Serial.print(", "); Serial.print(1); Serial.print(", "); Serial.println("1 },");
@@ -18,9 +18,9 @@ void cube_array(void){
   //front
   for(float j=-0.777; j<=0.777; j+=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
-        pixel_pos[i].x=j;
+        pixel_pos[i].x=k;
         pixel_pos[i].y=1;
-        pixel_pos[i].z=k;
+        pixel_pos[i].z=j;
         pixel_pos[i].side=2;
         //Serial.print("{"); Serial.print(j); Serial.print(", "); Serial.print(1); Serial.print(", "); Serial.print(k); Serial.print(", "); Serial.println("2 },");
         i++;
@@ -29,8 +29,8 @@ void cube_array(void){
   //bottom
   for(float j=-0.777; j<=0.777; j+=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
-        pixel_pos[i].x=j;
-        pixel_pos[i].y=k;
+        pixel_pos[i].x=k;
+        pixel_pos[i].y=j;
         pixel_pos[i].z=-1;
         pixel_pos[i].side=6;
         //Serial.print("{"); Serial.print(j); Serial.print(", "); Serial.print(k); Serial.print(", "); Serial.print(1); Serial.print(", "); Serial.println("6 },");
@@ -38,7 +38,7 @@ void cube_array(void){
     }
   }  
   //back
-  for(float j=-0.777; j<=0.777; j+=0.222){
+  for(float j=0.777; j>=-0.777; j-=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
         pixel_pos[i].x=j;
         pixel_pos[i].y=-1;
@@ -52,8 +52,8 @@ void cube_array(void){
   for(float j=-0.777; j<=0.777; j+=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
         pixel_pos[i].x=-1;
-        pixel_pos[i].y=k;
-        pixel_pos[i].z=j;
+        pixel_pos[i].y=j;
+        pixel_pos[i].z=k;
         pixel_pos[i].side=3;
         //Serial.print("{"); Serial.print(j); Serial.print(", "); Serial.print(k); Serial.print(", "); Serial.print(1); Serial.print(", "); Serial.println("3 },");
         i++;        
@@ -63,8 +63,8 @@ void cube_array(void){
   for(float j=-0.777; j<=0.777; j+=0.222){
     for(float k=-0.777; k<=0.777; k+=0.222){
         pixel_pos[i].x=1;
-        pixel_pos[i].y=k;
-        pixel_pos[i].z=j;
+        pixel_pos[i].y=j;
+        pixel_pos[i].z=k;
         pixel_pos[i].side=4;
         //Serial.print("{"); Serial.print(j); Serial.print(", "); Serial.print(k); Serial.print(", "); Serial.print(1); Serial.print(", "); Serial.println("4 },");
         i++;        
