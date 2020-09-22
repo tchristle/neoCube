@@ -22,8 +22,15 @@ void dispSprite(int num, int color, int side)
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+void full_solid(int colr){
+  
+    full_side(colr, 0.5f, 1);
+    full_side(colr, 0.5f, 2);
+    full_side(colr, 0.5f, 3);
+    full_side(colr, 0.5f, 4);
+    full_side(colr, 0.5f, 5);
+    full_side(colr, 0.5f, 6);
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void full_side(int color, float brt, int side){
@@ -34,6 +41,28 @@ void full_side(int color, float brt, int side){
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+void side_by_num(){
+  
+    dispChar('1', red, 1);
+    dispChar('2', blue, 2);
+    dispChar('3', green, 3);
+    dispChar('4', yellow, 4);
+    dispChar('5', pink, 5);
+    dispChar('6', orange, 6);
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+void rainbow_pattern(int n){
+  
+    for(int i=0; i<385; i++){
+      //leds.setPixel(i, colorc[i%192].r*0.5f, colorc[i%192].g*0.5f, colorc[i%192].b*0.5f);
+      n = (int(pixel_pos[i].x*86+86)+cntr)%192;
+      leds.setPixel(i, colorc[n].r*0.5f, colorc[n].g*0.5f, colorc[n].b*0.5f);
+      Serial.println(int(pixel_pos[i].x*86+86));
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
 void color_by_pos(){
   int r, b, g, color;
   float brt = 0.25f;
