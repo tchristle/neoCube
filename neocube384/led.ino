@@ -566,8 +566,8 @@ void demo6() {
 
     //rotate around y-wrap
     //rotate left
-    steps=0; //random(2)*9-1;
-    rows = 0;//random(2)*3+3;
+    steps=random(2)*9-1;
+    rows =random(2)*3+3;
     for(kdx=0; kdx<steps; kdx++){
       //store last column
       for(jdx=0; jdx<rows; jdx++){ color0[jdx]=leds.getPixel(y_wrap[31][jdx]);}
@@ -606,7 +606,7 @@ void demo6() {
 
     //rotate around z-wrap
     //rotate right
-    steps= 8; //random(2)*9-1;
+    steps= random(2)*9-1;
     rows = random(2)*3+3;
     for(kdx=0; kdx<steps; kdx++){
       
